@@ -1,0 +1,28 @@
+{
+    "id": "12",
+    "apis": [{
+        "request": "{\"query\":[],\"path\":[],\"body\":[{\"name\":\"list\",\"require\":false,\"type\":\"array\",\"mock\":\"1\",\"description\":\"\"},{\"name\":\"pageDTO\",\"require\":false,\"type\":\"array\",\"mock\":\"2\",\"description\":\"\"},{\"name\":\"\",\"require\":\"true\",\"type\":\"string\",\"mock\":\"3\",\"description\":\"\"}]}",
+        "response": "[{\"name\":\"salesId\",\"require\":false,\"type\":\"number\",\"mock\":\"1\",\"description\":\"员工ID\"},{\"name\":\"teamId\",\"require\":false,\"type\":\"number\",\"mock\":\"2\",\"description\":\"在职人\"},{\"name\":\"teamName\",\"require\":false,\"type\":\"string\",\"mock\":\"34\",\"description\":\"在职人\"},{\"name\":\"memberNum\",\"require\":false,\"type\":\"number\",\"mock\":\"5\",\"description\":\"\"},{\"name\":\"signInNum\",\"require\":false,\"type\":\"number\",\"mock\":\"6\",\"description\":\"\"},{\"name\":\"salesLevelCode\",\"require\":false,\"type\":\"number\",\"mock\":\"7\",\"description\":\"\"}]",
+        "description": "432",
+        "name": "用户信息",
+        "method": "post",
+        "path": "xts/info"
+    },{
+        "request": "{\"query\":[],\"path\":[],\"body\":[{\"name\":\"list\",\"require\":false,\"type\":\"array\",\"mock\":\"1\",\"description\":\"\"},{\"name\":\"pageDTO\",\"require\":false,\"type\":\"array\",\"mock\":\"2\",\"description\":\"\"},{\"name\":\"\",\"require\":\"true\",\"type\":\"string\",\"mock\":\"3\",\"description\":\"\"}]}",
+        "response": "[{\"name\":\"salesId\",\"require\":false,\"type\":\"number\",\"mock\":\"1\",\"description\":\"员工ID\"},{\"name\":\"teamId\",\"require\":false,\"type\":\"number\",\"mock\":\"2\",\"description\":\"在职人\"},{\"name\":\"teamName\",\"require\":false,\"type\":\"string\",\"mock\":\"34\",\"description\":\"在职人\"},{\"name\":\"memberNum\",\"require\":false,\"type\":\"number\",\"mock\":\"5\",\"description\":\"\"},{\"name\":\"signInNum\",\"require\":false,\"type\":\"number\",\"mock\":\"6\",\"description\":\"\"},{\"name\":\"salesLevelCode\",\"require\":false,\"type\":\"number\",\"mock\":\"7\",\"description\":\"\"}]",
+        "description": "432",
+        "name": "用户信息",
+        "method": "post",
+        "path": "xts/info"
+    }],
+    "metadata": [{
+        "name": "BaseResponseUnE",
+        "content": "[{\"name\":\"errorMsg\",\"require\":false,\"type\":\"string\",\"mock\":\"\",\"description\":\"\"},{\"name\":\"result\",\"require\":false,\"type\":\"number\",\"mock\":\"\",\"description\":\"\"}]",
+        "remark": ""
+    },
+    {
+        "name": "BaseResponseUnE",
+        "content": "[{\"name\":\"errorMsg\",\"require\":false,\"type\":\"string\",\"mock\":\"\",\"description\":\"\"},{\"name\":\"result\",\"require\":false,\"type\":\"number\",\"mock\":\"\",\"description\":\"\"}]",
+        "remark": ""
+    }]
+}

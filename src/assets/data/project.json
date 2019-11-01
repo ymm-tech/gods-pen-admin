@@ -1,0 +1,97 @@
+[
+  {
+    "name": "id",
+    "require": "true",
+    "type": "string",
+    "mock": "@id",
+    "description": ""
+  },
+  {
+    "name": "name",
+    "require": "true",
+    "type": "string",
+    "mock": "@cname",
+    "description": ""
+  },
+  {
+    "name": "description",
+    "require": "true",
+    "type": "string",
+    "mock": "@url",
+    "description": ""
+  },
+  {
+    "name": "version",
+    "require": "true",
+    "type": "string",
+    "mock": "@email",
+    "description": ""
+  },
+  {
+    "name": "createTime",
+    "require": "true",
+    "type": "number",
+    "mock": "",
+    "description": ""
+  },
+  {
+    "name": "cat",
+    "require": "true",
+    "type": "object",
+    "mock": "",
+    "description": "",
+    "child": [
+      {
+        "name": "id",
+        "require": "true",
+        "type": "number",
+        "mock": "@image",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "name": "apis",
+    "require": "true",
+    "type": "array",
+    "mock": "|5",
+    "description": "",
+    "child": [
+      {
+        "name": "createTime",
+        "require": "true",
+        "type": "number",
+        "mock": "@data",
+        "description": ""
+      },
+      {
+        "name": "updateTime",
+        "require": "true",
+        "type": "number",
+        "mock": "@image",
+        "description": ""
+      },
+      {
+        "name": "version",
+        "require": "true",
+        "type": "string",
+        "mock": "",
+        "description": ""
+      },
+      {
+        "name": "content",
+        "require": "true",
+        "type": "string",
+        "mock": "",
+        "description": ""
+      },
+      {
+        "name": "id",
+        "require": "true",
+        "type": "number",
+        "mock": "",
+        "description": ""
+      }
+    ]
+  }
+]

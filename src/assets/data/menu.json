@@ -1,0 +1,94 @@
+[
+  {
+    "resCode": "01",
+    "resKey": "01",
+    "resName": "测试例子",
+    "data": {},
+    "child": [
+      {
+        "resCode": "0101",
+        "resKey": "0101",
+        "resName": "弹框",
+        "data": {},
+        "child": [
+          {
+            "resCode": "010101",
+            "resKey": "demo-dialog1-1",
+            "resName": "弹出框",
+            "query": {
+              "a": 1
+            },
+            "child": [],
+            "data": {}
+          },
+          {
+            "resCode": "010102",
+            "resKey": "demo-dialog1-2",
+            "resName": "弹出框2",
+            "child": [],
+            "data": {}
+          }
+        ]
+      },
+      {
+        "resCode": "0101",
+        "resKey": "0102",
+        "resName": "弹框",
+        "data": {},
+        "child": [
+          {
+            "resCode": "010201",
+            "resKey": "demo-2dialog1-1",
+            "resName": "弹出框",
+            "child": [],
+            "data": {}
+          },
+          {
+            "resCode": "010102",
+            "resKey": "demo-2dialog1-2",
+            "resName": "弹出框2",
+            "child": [],
+            "data": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "resCode": "02",
+    "resKey": "02",
+    "resName": "测试例子2",
+    "data": {},
+    "child": [
+      {
+        "resCode": "0202",
+        "resKey": "0202",
+        "resName": "弹框222",
+        "data": {},
+        "child": [
+          {
+            "resCode": "020202",
+            "resKey": "demo-dialog2-2",
+            "resName": "弹出框2222",
+            "child": [],
+            "data": {}
+          },
+          {
+            "resCode": "020202",
+            "resKey": "demo-dialog2-1",
+            "resName": "弹出框22222",
+            "child": [],
+            "data": {}
+          },
+          {
+            "resCode": "020202",
+            "resKey": "demo-dialog",
+            "resName": "弹出框22222",
+            "child": [],
+            "data": {}
+          }
+        ]
+      }
+    ]
+  }
+]

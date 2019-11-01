@@ -1,0 +1,21 @@
+{
+  "pageSize": "12",
+  "list": [
+    {
+      "visibilitylevel":1,
+      "description":"描述",
+      "img":"http://secure.gravatar.com/avatar/fc5654afbe167b98e93674175607b80e?s=52&d=identicon",
+      "name":"项目名称",
+      "member":12,
+      "role":1
+    },
+    {
+      "visibilitylevel":1,
+      "description":"描述",
+      "img":"http://secure.gravatar.com/avatar/fc5654afbe167b98e93674175607b80e?s=52&d=identicon",
+      "name":"项目名2称",
+      "member":12,
+      "role":2
+    }
+  ]
+}

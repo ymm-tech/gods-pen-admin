@@ -1,0 +1,6 @@
+# Created by .ignore support plugin (hsz.mobi)
+dist/
+src/assets/
+src/assets/js/
+src/components/PageRouter.vue
+src/components/Dialogs.vue

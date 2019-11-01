@@ -1,0 +1,22 @@
+path: /name
+type: get
+description: 获取用户姓名
+parameters:
+  id: int|用户id
+  name: string|用户姓名
+responses:
+  200:
+    pageSize: int
+    list:
+      - name: int|描述
+        url: string|描述
+        pets:
+          - $ref: $Pet
+        age: int
+  500:
+    code: int
+    error: string
+definitions:
+  Pet:
+    product_id: string|Unique identifier
+    description: string|Description of product.

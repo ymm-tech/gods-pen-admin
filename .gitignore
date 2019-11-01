@@ -1,0 +1,13 @@
+*.log
+.cache
+.DS_Store
+.idea
+build
+dist
+node_modules
+.gitkeep
+converage
+yarn-error.log
+npm-debug.log
+.yarnclean
+src/config/docker.js
