@@ -35,7 +35,7 @@
           <div class="submit-box">
             <el-button class="submit-box__btn" type="primary" :loading="loading" @click="loginSubmit">登 陆</el-button>
             <div class="forget">
-              <div class="oauth-wrap" style="float:left;" v-if='1 || enableGithub'>
+              <div class="oauth-wrap" style="float:left;" v-if='enableGithub'>
                 <div class='oauth-channel'>
                   <el-tooltip class="item" effect="dark" content="GitHub登录" placement="top">
                     <img class='oauth' src="https://b-gold-cdn.xitu.io/v3/static/img/github.547dd8a.svg" alt="" @click='oauthGitHub("github")'>
