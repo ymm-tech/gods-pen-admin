@@ -28,7 +28,7 @@
     "js-cookie": "^2.1.4",
     "js-yaml": "^3.7.0",
     "loader-utils": "^1.1.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.13",
     "markdown-loader": "4.0.0",
     "monaco-editor": "^0.14.3",
     "monaco-editor-webpack-plugin": "^1.5.2",
