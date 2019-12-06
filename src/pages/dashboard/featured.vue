@@ -32,11 +32,12 @@
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped type="text/stylus">
- .box{
-    width 100%
-    height 100%
-    margin-top 50px
+  .box {
+    width: 100%;
+    height: 100%;
+    margin-top: 50px;
   }
+
   .boxSize {
     position: relative;
     float: left;
@@ -48,8 +49,9 @@
     border: 1px solid #ddd;
     // overflow: hidden;
     border-radius: 5px;
-    cursor pointer
-    transition: transform 0.4s ease
+    cursor: pointer;
+    transition: transform 0.4s ease;
+
     .sourceName {
       overflow: hidden;
       text-overflow: ellipsis;
@@ -59,25 +61,35 @@
       font-size: 16px;
       color: #333;
       line-height: 28px;
-      padding 10px 15px
+      padding: 10px 15px;
+
       i {
-        font-style normal
+        font-style: normal;
       }
+
       .itemName {
-        float left
+        float: left;
+        width: 126px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
+
       .fork {
-        float right
-        .num{
+        float: right;
+
+        .num {
           font-weight: 400;
           color: #666;
-          margin-left 10px
+          margin-left: 10px;
         }
       }
     }
-    .bottom{
-      margin-top 10px
+
+    .bottom {
+      margin-top: 10px;
     }
+
     .sourceKey {
       width: 200px;
       overflow: hidden;
@@ -97,7 +109,7 @@
     &:hover {
       cursor: pointer;
       // box-shadow: 0 10px 30px 0 hsla(0,0%,84.3%,.5);
-      transform: translate3d(0,-4px,0);
+      transform: translate3d(0, -4px, 0);
       box-shadow: 0px 0px 8px #8D8E8F;
     }
 
@@ -115,15 +127,14 @@
         filter: blur(10px);
         position: absolute;
         width: 100%;
-        z-index 1
-        left 0
+        z-index: 1;
+        left: 0;
       }
 
       .logo {
-        position relative
+        position: relative;
         width: 100%;
-        height: 100%;
-        z-index 2
+        z-index: 2;
       }
     }
 
@@ -138,43 +149,49 @@
         top: 34px;
         // background-color: rgba(4, 1, 1, 0.53);
         // padding: 10px;
-        z-index 3
+        z-index: 3;
       }
     }
+
     .qr {
-      float left
+      float: left;
       cursor: pointer;
-      top 8px
-      margin 0 10px
-      border 0
+      top: 8px;
+      margin: 0 10px;
+      border: 0;
+
       .qrBox {
-        position relative
+        position: relative;
         background-color: #eee;
         border-radius: 3px;
         text-align: center;
-        width 36px
-        height 36px
+        width: 36px;
+        height: 36px;
       }
+
       &:hover {
         .qrBox {
           background-color: #1593ff;
         }
+
         .qrcode {
           display: block;
         }
       }
+
       .eqf-QRcode {
         position: absolute;
         width: 20px;
         height: 20px;
         font-size: 20px;
-        background url('../../assets/image/project/qr.png')
-        background-repeat: no-repeat
-        background-size: 100% 100%
-        top 50%
-        transform translate(-50%, -50%)
+        background: url('../../assets/image/project/qr.png');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        top: 50%;
+        transform: translate(-50%, -50%);
       }
     }
+
     .editButton {
       display: inline-block;
       height: 32px;
@@ -185,46 +202,52 @@
       background: #1593ff;
       border-radius: 3px;
       float: right;
-      margin-right 20px
+      margin-right: 20px;
     }
+
     .act_btn:hover {
       .actions {
-        display block
+        display: block;
       }
     }
+
     .actions {
-      display none
-      position absolute
-      right 21px
-      bottom 50px
+      display: none;
+      position: absolute;
+      right: 21px;
+      bottom: 50px;
       width: 50%;
       text-align: left;
       background-color: #fff;
       box-shadow: 0px 0px 8px #8D8E8F;
       z-index: 999;
+
       .action {
         font-family: PingFang-SC-Medium;
-        text-decoration:none; 
-        color:#333;
+        text-decoration: none;
+        color: #333;
         font-size: 13px;
         cursor: pointer;
         transition: background-color 0.4s ease-in-out;
-        margin 0    
+        margin: 0;
         line-height: 25px;
         padding: 4px 10px;
+
         &:hover {
           background-color: #1593ff;
         }
       }
+
       .last {
-        width 100%
-        height 10px
-        margin 0  
-        padding 0
+        width: 100%;
+        height: 10px;
+        margin: 0;
+        padding: 0;
         background-color: rgba(220, 196, 196, 0.2);
       }
+
       .dele:hover {
-        background-color #f56c6c
+        background-color: #f56c6c;
       }
     }
   }
