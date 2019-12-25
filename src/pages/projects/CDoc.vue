@@ -52,6 +52,9 @@
                 <p class="action" v-if="item.status == 2" @click="changeStatus(item)" >
                   启用
                 </p>
+                <p class="action" @click="psd(item)" style="background-color: #86C23A" >
+                  PSD
+                </p>
                 <p class="action dele" @click="delet(item)" v-show="item.status==1">删除
                 </p>
                 <p class="last"></p>
@@ -63,6 +66,34 @@
       </div>
     </div>
     <!--页面列表信息/-->
+    <el-dialog
+      title="psd上传记录"
+      :visible.sync="dialogVisible"
+      center
+      width="30%"
+      >
+      <el-table
+        :data="psdList"
+        style="width: 100%">
+        <el-table-column
+          prop="name"
+          label="名称"
+          >
+        </el-table-column>
+        <el-table-column
+          label="大小"
+         >
+         <template slot-scope="scope">
+          <span>{{scope.row.size}}M</span>
+        </template>
+        </el-table-column>
+        <el-table-column
+          label="地址">
+          <template slot-scope="scope">
+          <a :href="scope.row.url">链接</a>
+        </template>
+        </el-table-column>
+      </el-table>
   </div>
 </template>
 
@@ -357,7 +388,9 @@
           curr: 1,   // 当前页数
           size: 10   // 每页几条
         },
-        projectMd: projectMd
+        projectMd: projectMd,
+        dialogVisible: false,
+        psdList: []
       }
     },
     mounted: function () {
@@ -510,6 +543,11 @@
             }
           })
         })
+      },
+      psd (item) {
+        console.log(item)
+        this.psdList = item.psdList
+        this.dialogVisible = true
       }
     }
   }
