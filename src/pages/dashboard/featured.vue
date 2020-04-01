@@ -359,7 +359,7 @@
         }
       },
       getqrUrl: function (item) {
-        return `https://www.kuaizhan.com/common/encode-png?large=true&data=${encodeURIComponent(this.getUrl(item, 1))}`
+        return `https://www.liantu.com/api.php?text=${encodeURIComponent(this.getUrl(item, 1))}`
       },
     }
   }
