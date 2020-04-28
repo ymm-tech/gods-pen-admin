@@ -1,10 +1,12 @@
 <template>
-  <div class="content-wrapper">
-    <el-alert v-if="userInfo.role === 1" type="success" :closable="false">
-      <router-link style="font-size: 14px;" to="/dashboard/featuring">精选页面审核 >></router-link>
-    </el-alert>
+  <div v-if="userInfo.role === 1" class="content-wrapper">
     <div class='container-fluid container-limited box'>
-      <div class="boxSize" v-for="(item, k) in productList" :key='k'>
+      <div style="margin-bottom: 25px; text-align: right;">
+        <el-input style="width: 200px;margin-right:20px;" placeholder="请输入页面 key" v-model="pagekey"></el-input>
+        <el-button @click="updateItem({}, 1, true)">加精</el-button>
+        <el-button @click="updateItem({}, 2, true)">撤销加精</el-button>
+      </div>
+      <div class="boxSize" v-for="(item, k) in featuringPages" :key='k'>
         <div class="sourceImg">
           <a :href="getUrl(item,true)" target="_blank" >
             <img :src="item.image||'https://ymm-maliang.oss-cn-hangzhou.aliyuncs.com/ymm-maliang/access/ymm1562307855048.png'" class="logo">
@@ -12,10 +14,6 @@
         </div>
         <div class="sourceName">
           <i class="itemName">{{item.name}}</i>
-          <div class="fork">
-            <svg style="vertical-align: -2px;" viewBox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg>
-            <i class="num">{{+item.fork || 0}}</i>
-          </div>
         </div>
         <div class="bottom">
           <a class="qr">
@@ -26,15 +24,26 @@
               <img class="qrcode" :src="getqrUrl(item)" alt="">
             </a>
           </a>
-          <p class="editButton" @click="useTemp(item)">立即使用</p>
-            <!-- <a class="editButton act_btn" @click="delet(item)">删除</a> -->
+          <el-button class="control-item" size="mini" @click="updateItem(item, 1)">设为精选</el-button>
+          <el-button class="control-item" size="mini" type="primary" @click="updateItem(item, 2)">设为普通</el-button>
         </div>
       </div>
+    </div>
+    <div class="loadmore">
+      <el-button @click="list" v-if="!emptylist" style="font-size: 20px;" type="text">再来一波 <i class="el-icon-refresh"></i> </el-button>
+      <el-button style="font-size: 20px;" v-else type="text">暂无待审核页面</el-button>
     </div>
   </div>
 </template>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped type="text/stylus">
+  .control-item {
+    line-height 1.2
+    padding 10px
+  }
+  .loadmore {
+    text-align center
+  }
   .box {
     width: 100%;
     height: 100%;
@@ -198,7 +207,7 @@
     .editButton {
       display: inline-block;
       height: 32px;
-      width: 116px;
+      width: 60px;
       text-align: center;
       line-height: 32px;
       color: #fff;
@@ -263,93 +272,72 @@
   export default {
     mixins: [BasePage],
     components: {},
-    name: 'dashboard-featured',
+    name: 'dashboard-featuring',
     data () {
       return {
-        productList: [],
+        pagekey: '',
+        pages: [],
       }
     },
     mounted () {
-      this.detailInfo()
-      this.bindEvent('pageAddSuccess', () => {
-        this.detailInfo()
-      })
+      this.list()
+    },
+    computed: {
+      emptylist () {
+        return this.pages.length === 0
+      },
+      featuringPages () {
+        return (this.pages || []).filter(v => v.featured === 0)
+      }
     },
     methods: {
-      // 立即使用
-      useTemp: function (item) {
-        Server({
-          url: 'editor/pages/detail',
-          method: 'post', // default
-          needLoading: false,
-          data: {
-            scene: 'copy',
-            pageKey: item.key,
-          }
-        }).then((respond) => {
-          console.log('bbb', respond.data.data)
-          const source = respond.data.data
-          this.openDialog({
-            name: 'DCopyPage',
-            data: {
-              title: '创建页面',
-              type: 'fork',
-              source: {
-                projectId: source.projectId,
-                id: source.id
-              },
-              form: {
-                name: `复制${source.name}${Math.floor(Math.random() * 100)}`,
-                desc: `复制${source.desc}${Math.floor(Math.random() * 100)}`,
-                visibilitylevel: 0,
-                content: source.content,
-                image: source.image
-              }
-            },
-            methods: {
-            }
+      updateItem: function (item, value, bykey = false) {
+        if (bykey && !/^\w{3,}$/.test(this.pagekey)) {
+          return this.$message({
+            type: 'error',
+            message: '请输入页面 key'
           })
-        })
-      },
-      // 删除
-      delet: function (item) {
+        }
         var me = this
-        me.$confirm(`是否删除？`, {
+        const msg = `是否设置为${value === 1 ? '精选' : '普通'}`
+        me.$confirm(msg, {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
           Server({
-            url: 'editor/pages/delete',
+            url: 'editor/pages/update-featured',
             method: 'POST',
             needLoading: true,
             trimNull: false,
-            data: {
-              id: +item.id
+            data: !bykey ? {
+              id: +item.id,
+              value: value
+            } : {
+              key: this.pagekey,
+              value: value
             }
           }).then(function (res) {
+            if (!bykey) item.featured = value
             me.$message({
               type: 'success',
-              message: '删除成功!'
+              message: '操作成功'
             })
-            me.detailInfo()
+            me.pagekey = ''
           })
         })
       },
-      // 模板列表
-      detailInfo () {
+      list () {
         Server({
-          url: 'editor/pages/publiclist',
+          url: 'editor/pages/featuring',
           method: 'post',
           needLoading: true,
           trimNull: false,
           data: {
-            name: '',
-            tags: [],
-            featured: 1
+            month: 3
           }
         }).then((res) => {
-          this.productList = res.data.data || []
+          this.pages = res.data.data || []
         })
       },
       getUrl: function (item, isClient) {
