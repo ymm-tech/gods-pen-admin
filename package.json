@@ -11,7 +11,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.15.2",
+    "axios": "^0.21.1",
     "babel-polyfill": "*",
     "caniuse-lite": "^1.0.0",
     "clipboard": "^1.5.16",
