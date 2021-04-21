@@ -36,11 +36,11 @@
               <i class="eqf-QRcode"></i>
             </div>
             <a :title="item.desc" style="display: inline-block; cursor: pointer;" :href="getUrl(item,true)" target="_blank" class="erCode" >
-              <img class="qrcode" :src="getqrUrl(item)" alt="">
+              <img class="qrcode" :src="item.qrUrl" alt="">
             </a>
           </a>
           <div class="sourceButton">
-            
+
             <a class="editButton" :href="getUrl(item)" target="_blank">编辑</a>
             <a class="editButton act_btn" target="_blank">操作
               <div class="actions">
@@ -57,7 +57,7 @@
                 <p class="last"></p>
               </div>
             </a>
-            
+
           </div>
         </div>
       </div>
@@ -263,7 +263,7 @@
       align-items: center;
 
       .editButton {
-        text-decoration:none; 
+        text-decoration:none;
         color:#333;
         margin: 10px 2px;
         padding 6px 10px
@@ -295,12 +295,12 @@
         z-index: 999;
         .action {
           font-family: PingFang-SC-Medium;
-          text-decoration:none; 
+          text-decoration:none;
           color:#333;
           font-size: 13px;
           cursor: pointer;
           transition: background-color 0.4s ease-in-out;
-          margin 0    
+          margin 0
           line-height: 25px;
           padding: 4px 10px;
           &:hover {
@@ -310,7 +310,7 @@
         .last {
           width 100%
           height 10px
-          margin 0  
+          margin 0
           padding 0
           background-color: rgba(220, 196, 196, 0.2);
         }
@@ -323,6 +323,7 @@
 </style>
 
 <script type="text/ecmascript-6">
+  import QRCode from 'qrcode'
   import BasePage from 'src/extend/BasePage'
   import Server from 'src/extend/Server'
   const config = require('src/config')
@@ -393,9 +394,6 @@
           return `${config.EDITOR_PATH}?key=${item.key}`
         }
       },
-      getqrUrl: function (item) {
-        return `https://www.liantu.com/api.php?text=${encodeURIComponent(this.getUrl(item, 1))}`
-      },
       // 1启用、2禁用 0删除
       changeStatus: function (item) {
         var me = this
@@ -462,6 +460,7 @@
           }
         }).then((res) => {
           this.productList = res.data.data || []
+          this.setQRUrls(this.productList)
         })
       },
       // 详情
@@ -509,6 +508,16 @@
             methods: {
             }
           })
+        })
+      },
+      setQRUrls (productList) {
+        productList.forEach(item => {
+          const url = this.getUrl(item, 1)
+          try {
+            QRCode.toDataURL(url).then(value => {this.$set(item, 'qrUrl', value)})
+          } catch (e) {
+            console.log(e)
+          }
         })
       }
     }
