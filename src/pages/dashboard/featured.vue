@@ -23,7 +23,7 @@
               <i class="eqf-QRcode"></i>
             </div>
             <a :title="item.desc" style="display: inline-block; cursor: pointer;" :href="getUrl(item,true)" target="_blank" class="erCode" >
-              <img class="qrcode" :src="getqrUrl(item)" alt="">
+              <img class="qrcode" :src="item.qrUrl" alt="">
             </a>
           </a>
           <p class="editButton" @click="useTemp(item)">立即使用</p>
@@ -257,6 +257,7 @@
 </style>
 
 <script type="text/ecmascript-6">
+  import QRCode from 'qrcode'
   import BasePage from 'src/extend/BasePage'
   import Server from 'src/extend/Server'
   import config from 'src/config/index'
@@ -350,6 +351,7 @@
           }
         }).then((res) => {
           this.productList = res.data.data || []
+          this.setQRUrls(this.productList)
         })
       },
       getUrl: function (item, isClient) {
@@ -362,8 +364,15 @@
           return `${config.EDITOR_PATH}?key=${item.key}`
         }
       },
-      getqrUrl: function (item) {
-        return `https://www.liantu.com/api.php?text=${encodeURIComponent(this.getUrl(item, 1))}`
+      setQRUrls (list) {
+        list.forEach(item => {
+          const url = this.getUrl(item, 1)
+          try {
+            QRCode.toDataURL(url).then(value => { this.$set(item, 'qrUrl', value) })
+          } catch {
+            console.error('生成二维码出错')
+          }
+        })
       },
     }
   }

@@ -44,7 +44,7 @@
                   <img :src="item.image||'https://ymm-maliang.oss-cn-hangzhou.aliyuncs.com/ymm-maliang/access/ymm1562307855048.png'" alt="">
                 </div>
                 <a :title="item.desc" style="display: inline-block; cursor: pointer;" :href="getUrl(item,true)" target="_blank">
-                  <img class="qrcode" :src="getqrUrl(item)" alt="">
+                  <img class="qrcode" :src="item.qrUrl" alt="">
                 </a>
                 <div class="sourceButton">
                   <a class="editButton" @click='setting(item)'>设置</a>
@@ -227,6 +227,7 @@
 </style>
 
 <script type="text/ecmascript-6">
+  import QRCode from 'qrcode'
   import BasePage from 'src/extend/BasePage'
   import Server from 'src/extend/Server'
   const config = require('../../config/index.js')
@@ -274,9 +275,6 @@
           return `${config.EDITOR_PATH}?key=${item.key}`
         }
       },
-      getqrUrl: function (item) {
-        return `https://www.liantu.com/api.php?text=${encodeURIComponent(this.getUrl(item, 1))}`
-      },
       tabHandleClick (tab) {
         this.activeName = tab.name
         if (tab.name == 'public') {
@@ -294,6 +292,17 @@
           }
         }).then((res) => {
           this.publicPage = res.data.data || []
+          this.setQRUrls(this.publicPage)
+        })
+      },
+      setQRUrls (list) {
+        list.forEach(item => {
+          const url = this.getUrl(item, 1)
+          try {
+            QRCode.toDataURL(url).then(value => { this.$set(item, 'qrUrl', value) })
+          } catch {
+            console.error('生成二维码出错')
+          }
         })
       },
       loadStarProject: function () {
