@@ -33,7 +33,7 @@
     "markdown-loader": "4.0.0",
     "monaco-editor": "^0.14.3",
     "monaco-editor-webpack-plugin": "^1.5.2",
-    "qs": "^6.3.1",
+    "qs": "^6.7.3",
     "title-notify": "^1.0.13",
     "vue": "^2.5.16",
     "vue-clipboards": "^1.1.0",
